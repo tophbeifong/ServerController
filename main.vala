@@ -119,6 +119,17 @@ public class ServerController : Gtk.Window {
         //);
         headerLayout.attach(refresh, 1 , 0 , 1, 1);
 
+
+        Gtk.Image console_icon = new Gtk.Image.from_icon_name("view-dual-symbolic",IconSize.SMALL_TOOLBAR);
+        Gtk.ToolButton console_button = new Gtk.ToolButton(console_icon, "Open Console");
+        console_button.is_important = true;
+        Console console_window = new Console();
+        //console_button.clicked.connect(
+          //  console_window.main()
+        //);
+        headerLayout.attach(console_button, 2 , 0 , 1, 1);
+
+
         header.add(headerLayout);
 
 

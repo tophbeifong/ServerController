@@ -1,8 +1,8 @@
 public class ServerControllerAboutDialog : Gtk.Window{
     public ServerControllerAboutDialog(){
-        this.title = "About ServerController";
+        this.title = "About";
         this.destroy.connect(Gtk.main_quit);
-        this.set_default_size(450, 630);
+        this.set_default_size(550, 400);
         this.border_width = 2;
 		this.window_position = Gtk.WindowPosition.CENTER;
 
@@ -12,7 +12,9 @@ public class ServerControllerAboutDialog : Gtk.Window{
     private void init_ui(){
 
         //create box layout
-        Gtk.Box box = new Gtk.Box(Gtk.Orientation.VERTICAL, 10);
+        Gtk.Box box = new Gtk.Box(Gtk.Orientation.VERTICAL, 150);
+
+        Settings settings = new Settings();
 
         //all widgets, box will do fine as i only want a vertical layout.
         Gtk.Label header = new Gtk.Label("ServerController");

@@ -1,5 +1,6 @@
 {
     "default_devices_directory":"devices/",
-    "Build By":"Peter Arnell",
-    "Credits":"YouTube, Valadoc, Elementary Developers, StackOverflow, Gnome.org"      
+    "custom_styles_directory":"settings/styles.css",
+    "creator":"Peter Arnell",
+    "credits":"YouTube, Valadoc, Elementary Developers, StackOverflow, Gnome.org"      
 }
