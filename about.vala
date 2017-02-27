@@ -14,17 +14,20 @@ public class ServerControllerAboutDialog : Gtk.Window{
         //create box layout
         Gtk.Box box = new Gtk.Box(Gtk.Orientation.VERTICAL, 10);
 
+        //all widgets, box will do fine as i only want a vertical layout.
         Gtk.Label header = new Gtk.Label("ServerController");
         Gtk.Label main_text = new Gtk.Label("A remote system control application build for elementaryOS by ");
         Gtk.Label version = new Gtk.Label("Version 0.0.1(active development)");
         Gtk.Button close = new Gtk.Button.with_label("Close");
 
+        //functionallity for the close button
         close.clicked.connect(Gtk.main_quit);
 
+        //add widgets to the box
         box.pack_start(header);
         box.pack_start(main_text);
         box.pack_start(version);
-        box.pack_end(close);
+        box.pack_end(close, false, false, 15);
 
         this.add(box);
 
@@ -38,6 +41,7 @@ int main(string[] args){
 
     var css_provider = new Gtk.CssProvider();
     try{
+        //struggling to find the styles file... :/
         css_provider.load_from_path("settings/styles.css");
     }catch(Error e){
         warning("No Styles...");
