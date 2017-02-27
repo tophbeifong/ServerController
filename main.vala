@@ -158,7 +158,6 @@ public class ServerController : Gtk.Window {
                 
             try {
                 
-                //Thread<void> thread = new Thread<void>.try("Conntections Thread.", devices_online(listmodel));
                 Thread<void*> thread = new Thread<void*>.try ("Conntections Thread.", () => { devices_online (listmodel); return null;});
 
             }catch(Error thread_error){

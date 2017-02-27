@@ -4,4 +4,4 @@
  - Intergrate commandline as to send terminal commands to clients [0% COMPLETED]
  - Context menu options [0% COMPLETED]
  - Create actual settings methods the get settings data from JSON file within a settings directory [100% COMPLETED]
- - Create about dialog [5% COMPLETED]
+ - Create about dialog [80% COMPLETED]

@@ -8,6 +8,10 @@ public class Settings{
 
     }
 
+    public string creator(){
+        return settings_parse("creator");
+    }
+
     private string settings_parse(string data){
         try {
 
