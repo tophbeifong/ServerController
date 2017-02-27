@@ -1,0 +1,7 @@
+//TODO FILE
+ - Add multithreading so GUI loads at the same time as the connections are being tested. [0% COMPLETED]
+ - Add functionality to the headerbar buttons [0% COMPLETED]
+ - Intergrate commandline as to send terminal commands to clients [0% COMPLETED]
+ - Context menu options [0% COMPLETED]
+ - Create actual settings methods the get settings data from JSON file within a settings directory [100% COMPLETED]
+ - Create about dialog [5% COMPLETED]
