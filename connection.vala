@@ -31,4 +31,9 @@ public class Connection {
 
         return false;
     }
+
+    public bool send_data(){
+
+        return false;
+    }
 }
