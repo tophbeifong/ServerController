@@ -1,7 +1,10 @@
 GtkButton{
     width:100px;
     height:30px;
-    margin:0 auto;
-    background:red;
+}
+
+headerLabel{
+    font-size:0.9em;
+    font-weight:bold;
 }
 
