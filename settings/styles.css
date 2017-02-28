@@ -1,10 +1,11 @@
 GtkButton{
-    width:100px;
-    height:30px;
+    margin:5px;
 }
 
-headerLabel{
-    font-size:0.9em;
-    font-weight:bold;
+.headerLabel{
+    font-size:25px;
 }
 
+.statusStrip{
+    background:#ffffff;
+}

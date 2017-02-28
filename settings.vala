@@ -1,15 +1,11 @@
 using Json;
 
 public class Settings{
-    public string device_directory(){
 
-        //return the directory path via the parse method
-        return settings_parse("default_devices_directory") ;
+    public string retrieve_data(string data_to_get){
 
-    }
-
-    public string creator(){
-        return settings_parse("creator");
+        //return the selected data
+        return settings_parse(data_to_get);
     }
 
     private string settings_parse(string data){
@@ -17,7 +13,7 @@ public class Settings{
 
             //open and read the json file while storing the contents in a string variable
             string res = "";
-            var file = File.new_for_path ("settings/settings.json");
+            var file = File.new_for_path ("./settings/settings.json");
 
             //check the file exists
             if (file.query_exists ()) {

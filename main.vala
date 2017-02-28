@@ -6,7 +6,7 @@ public class ServerController : Gtk.Window {
     private string get_data(string data_type, string device){
 
         Settings settings = new Settings();
-        string file_location = settings.device_directory();
+        string file_location = settings.retrieve_data("default_devices_directory");
         string file = file_location.concat(device);
         string[2] file_lines = {};
 
@@ -38,7 +38,7 @@ public class ServerController : Gtk.Window {
 
         //create settings objec
         Settings settings = new Settings();
-        string file_location = settings.device_directory();
+        string file_location = settings.retrieve_data("default_devices_directory");
 
         try{
 
@@ -119,17 +119,6 @@ public class ServerController : Gtk.Window {
         //);
         headerLayout.attach(refresh, 1 , 0 , 1, 1);
 
-
-        Gtk.Image console_icon = new Gtk.Image.from_icon_name("view-dual-symbolic",IconSize.SMALL_TOOLBAR);
-        Gtk.ToolButton console_button = new Gtk.ToolButton(console_icon, "Open Console");
-        console_button.is_important = true;
-        Console console_window = new Console();
-        //console_button.clicked.connect(
-          //  console_window.main()
-        //);
-        headerLayout.attach(console_button, 2 , 0 , 1, 1);
-
-
         header.add(headerLayout);
 
 
@@ -156,6 +145,20 @@ public class ServerController : Gtk.Window {
         Gtk.ListStore listmodel = new Gtk.ListStore (4, typeof (string), typeof (string), typeof (string), typeof (string));
         view.set_model (listmodel);
 
+
+        //create label widget
+        // Added the status box first so im able to update
+        // the label once the connections thread has completed.
+        Gtk.Entry status = new Gtk.Entry();
+        status.set_text("loading clients...");
+        status.set_editable(false);
+
+        //give a class to the statusstrip
+        status.get_style_context().add_class("statusStrip");
+
+        //add status bar to the box(end)
+        box.pack_end(status, false, false, 0);
+
         //create column titles
         view.insert_column_with_attributes (-1, "Device Name                  ", new CellRendererText (), "text", 0);
         view.insert_column_with_attributes (-1, "IP Address", new CellRendererText (), "text", 1);
@@ -169,12 +172,22 @@ public class ServerController : Gtk.Window {
                 
             try {
                 
-                Thread<void*> thread = new Thread<void*>.try ("Conntections Thread.", () => { devices_online (listmodel); return null;});
+                Thread<void*> thread = new Thread<void*>.try ("Conntections Thread.", () => { 
+
+                    //run the devices_online function to check who's listening
+                    devices_online (listmodel);
+
+                    //update the status bar text
+                    status.set_text("Fetched online clients. Awaiting commands..."); 
+
+                    //return null
+                    return null;
+                });
 
             }catch(Error thread_error){
 
                 //console print thread error message
-                stdout.printf("%s", thread_error.message);
+                warning("%s", thread_error.message);
             }	
 
         }else{
@@ -193,7 +206,8 @@ public class ServerController : Gtk.Window {
 
         }
 
-        box.pack_start(view);
+        box.pack_start(view, true, true, 0);
+
 
         this.add(box);
     }      
@@ -201,6 +215,21 @@ public class ServerController : Gtk.Window {
 
 int main(string[] args){
     Gtk.init(ref args);
+
+    var css_provider = new Gtk.CssProvider();
+    try{
+        //css stylesheet...
+        css_provider.load_from_path("settings/styles.css"/*settings.retrieve_data("custom_styles_directory")*/);
+    }catch(Error e){
+        warning("%s", e.message);
+    }
+
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(),
+        css_provider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    );
+
     new ServerController();
     Gtk.main();
     return 0;
