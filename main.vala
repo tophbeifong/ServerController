@@ -2,7 +2,6 @@ using Gtk;
 
 public class ServerController : Gtk.Window {
     public TreeIter iter;
-    public Gtk.Entry status = new Gtk.Entry();
 
     private string get_data(string data_type, string device){
 
@@ -111,7 +110,6 @@ public class ServerController : Gtk.Window {
         new_device.clicked.connect(() => {
             AddDialog add_new = new AddDialog();
             add_new.main_win({});
-            status.set_text("Attempting to add device... Refeshing live clients.");
         });        
         headerLayout.attach(new_device, 0 , 0 , 1, 1);
 
