@@ -2,6 +2,7 @@ using Gtk;
 
 public class ServerController : Gtk.Window {
     public TreeIter iter;
+    public Gtk.Entry status = new Gtk.Entry();
 
     private string get_data(string data_type, string device){
 
@@ -107,7 +108,11 @@ public class ServerController : Gtk.Window {
         new_device.is_important = true;
 
 
-        //new_device.clicked.connect(devices_online);        
+        new_device.clicked.connect(() => {
+            AddDialog add_new = new AddDialog();
+            add_new.main_win({});
+            status.set_text("Attempting to add device... Refeshing live clients.");
+        });        
         headerLayout.attach(new_device, 0 , 0 , 1, 1);
 
         //add refresh button to the header bar
@@ -206,11 +211,11 @@ public class ServerController : Gtk.Window {
 
         }
 
+        //add the listview to the box for display
         box.pack_start(view, true, true, 0);
 
-
         this.add(box);
-    }      
+    }   
 }
 
 int main(string[] args){
